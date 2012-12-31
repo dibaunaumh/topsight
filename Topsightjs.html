@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- saved from url=(0021)http://jade-lang.com/ -->
+<html class=" chrome" minus_screen_capture_injected="true"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>Topsight.js - Zoomable UI Engine</title>
+		<link rel="stylesheet" href="./stylesheets/style.css">
+	<style type="text/css"></style><meta name="chromesniffer" id="chromesniffer_meta" content="{&quot;Google Analytics&quot;:-1}"><script type="text/javascript" src="chrome-extension://homgcnaoacgigpkkljjjekpignblkeae/detector.js"></script></head>
+	<body>
+		<div id="container">
+			<a href="http://github.com/visionmedia/jade"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 50" src="./images/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+			<div id="header">
+				<h1>Topsight.js</h1>
+				<div id="arrow"></div>
+				<span id="tagline">Zoomable UI Engine</span>
+        <div id="apidocs"><a href="docs.html">View Documentation</a></div>
+				<pre id="jade">					<code>
+topsight.define("station", function(model) {
+    topsight.construct({
+        "wheel": {
+            center_x: 50,
+            center_y: 50,
+            radius: 20,
+            color: "black",
+            fill_color: "white"
+        },
+        "label": {
+            x: 50,
+            y: 10,
+            text: model.name
+        },
+        "paper": {
+            x: 50,
+            y: 80,
+            placeholder: "Enter description",
+        }
+    });
+});
+
+topsight.define("metro_line", function(model) {
+    var prev_station = null;
+    for (var i in model.stations) {
+        var station_id = model.stations[i];
+        var station = topsight.select("station#" + station_id);
+        topsight.construct(station);
+        if (prev_station) {
+            topsight.construct({
+                "pipe": {
+                    from_x: prev_station.x,
+                    from_y: prev_station.y,
+                    to_x: station.x,
+                    to_y: station.y,
+                    color: model.color,
+                    width: 2
+                }
+            });
+            prev_station = station;
+        }
+    });
+});
+
+topsight.construct({
+    station: [
+        "south_kensington": {
+            name: "South Kensington",
+            x: 10,
+            y: 70
+        }
+    ],
+    metro_line: [
+        "blue_line": {
+            color: "blue",
+            stations: ["south_kensington", "", ""]
+        },
+    ]
+});
+					</code>
+				</pre>
+				<pre id="html">
+<img src="./images/map.png" width="330px">
+				</pre>
+			</div>
+		</div>
+	
+
+</body></html>
