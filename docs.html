@@ -8,18 +8,37 @@
     <h1>Topsight.js - Documentation</h1>
 
     <p>
-        Topsight is a term coined by the famous Yale professor David Gelernter, to denote the ability to see the big picture of a complex system. Topsight.js is an engine for constructing Zoomable UI, that enables seeing the big picture while still being able to zoom into the small details, just like in online maps. A famous example for Zoomable UI is the presentation tool <a href="http://prezi.com/8cnbaa97_ssf/prezi-book-mastering-prezi-for-business-presentations/">Prezi</a>.
+        Topsight is a term coined by the computer scientist David Gelernter, to denote the ability to see the big picture of a complex system.
+        <br>
+        Topsight.js is an engine for constructing Zoomable UI, that enables seeing the big picture while still being able to zoom into the small details, just like in online maps.
+        <br>
+        An example for Zoomable UI is the presentation tool <a href="http://prezi.com/8cnbaa97_ssf/prezi-book-mastering-prezi-for-business-presentations/">Prezi</a>.
     </p>
 
+    <p>
+        The framework arrives with a set of basic artifacts (widgets), named after physical artifacts for intuitiveness:
+    </p>
+    <ul>
+        <li>paper: for text input</li>
+        <li>label: a text label</li>
+        <li>wheel: a circle</li>
+        <li>pipe: a connector line</li>
+    </ul>
 
+    <p>
+        Artifacts are constructed as follows:
+    </p>
     <ul>
         <li>artifact are always drawn in logical view: 0,0 - 100,100</li>
         <li>artifacts are constructed in the coordinates system of their container. the top container also has 0,0-100,100 coordinates.</li>
         <li>a context reference allows selecting other artifacts in the scene, using their name</li>
         <li>events are handled seperately, using jquery selectors syntax</li>
-        <li>framework arrives with a set of defined artifacts</li>
-        <li>framework arrives with zooming capability</li>
     </ul>
+
+
+    <p>
+        For events handling, it uses the common JQuery syntax with selectors & event listeners.
+    </p>
 
 </body>
 </html>

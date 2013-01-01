@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <!-- saved from url=(0021)http://jade-lang.com/ -->
-<html class=" chrome" minus_screen_capture_injected="true"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<html class=" chrome" minus_screen_capture_injected="true">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Topsight.js - Zoomable UI Engine</title>
 		<link rel="stylesheet" href="./stylesheets/style.css">
-	<style type="text/css"></style><meta name="chromesniffer" id="chromesniffer_meta" content="{&quot;Google Analytics&quot;:-1}"><script type="text/javascript" src="chrome-extension://homgcnaoacgigpkkljjjekpignblkeae/detector.js"></script></head>
+	</head>
 	<body>
 		<div id="container">
-			<a href="http://github.com/visionmedia/jade"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 50" src="./images/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 			<div id="header">
 				<h1>Topsight.js</h1>
 				<div id="arrow"></div>
 				<span id="tagline">Zoomable UI Engine</span>
         <div id="apidocs"><a href="docs.html">View Documentation</a></div>
-				<pre id="jade">					<code>
+				<pre id="topsight">					<code>
+var topsight = Topsight.View("map_div");
+
+// define some artefacts
+
 topsight.define("station", function(model) {
     topsight.construct({
         "wheel": {
-            center_x: 50,
-            center_y: 50,
-            radius: 20,
+            position: Topsight.center(),
+            dimensions: [20, 20],
             color: "black",
             fill_color: "white"
         },
         "label": {
-            x: 50,
-            y: 10,
+            position: Topsight.above("wheel"),
+            dimensions: [50, 20]
             text: model.name
         },
         "paper": {
-            x: 50,
-            y: 80,
+            position: Topsight.below("wheel"),
+            dimensions: [50, 20]
             placeholder: "Enter description",
         }
     });
@@ -44,10 +48,8 @@ topsight.define("metro_line", function(model) {
         if (prev_station) {
             topsight.construct({
                 "pipe": {
-                    from_x: prev_station.x,
-                    from_y: prev_station.y,
-                    to_x: station.x,
-                    to_y: station.y,
+                    from_position: prev_station.position,
+                    to_position: station.position,
                     color: model.color,
                     width: 2
                 }
@@ -57,24 +59,57 @@ topsight.define("metro_line", function(model) {
     });
 });
 
+// now draw the map
+
 topsight.construct({
     station: [
-        "south_kensington": {
+        "kensington": {
             name: "South Kensington",
-            x: 10,
-            y: 70
-        }
+            position: [10, 70]
+        },
+        "green_park": {
+            name: "Green Park",
+            position: [50, 10]
+        },
+        "victoria": {
+            name: "Victoria",
+            position: [50, 70]
+        },
+        "piccadilly": {
+            name: "Piccadilly Circus",
+            position: [70, 10]
+        },
+        "westminister": {
+            name: "Westminister",
+            position: [70, 70]
+        },
     ],
     metro_line: [
         "blue_line": {
             color: "blue",
-            stations: ["south_kensington", "", ""]
+            stations: ["kensington", "green_park", "piccadilly"]
+        },
+        "green_line": {
+            color: "green",
+            stations: ["kensington", "victoria", "westminister"]
+        },
+        "yellow_line": {
+            color: "yellow",
+            stations: ["kensington", "victoria", "westminister"]
+        },
+        "lightblue_line": {
+            color: "lightblue",
+            stations: ["victoria", "green_park"]
+        },
+        "grey_line": {
+            color: "grey",
+            stations: ["green_park", "westminister"]
         },
     ]
 });
 					</code>
 				</pre>
-				<pre id="html">
+				<pre id="result">
 <img src="./images/map.png" width="330px">
 				</pre>
 			</div>
