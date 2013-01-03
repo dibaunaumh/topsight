@@ -23,8 +23,6 @@ topsight.define("station", function(model) {
         "wheel": {
             position: Topsight.center(),
             dimensions: [20, 20],
-            color: "black",
-            fill_color: "white"
         },
         "label": {
             position: Topsight.above("wheel"),
@@ -51,7 +49,6 @@ topsight.define("metro_line", function(model) {
                     from_position: prev_station.position,
                     to_position: station.position,
                     color: model.color,
-                    width: 2
                 }
             });
             prev_station = station;
