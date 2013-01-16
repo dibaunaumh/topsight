@@ -2,26 +2,24 @@
 
 
 Topsight = (function() {
-	var artifacts = {};
-
-	var init = function() {
-		if (artifacts == {}) {
-			define_built_ins();
-		}
-	);
-
-	var define = function(name, constructor) {
-		if (typeof(constructor) == "function") {
-			artifacts[name] = constructor;
-		}
-		else {
-			console.log("Error: Topsight.define should receive a name and a constructor function");
-		}
-	};
 
 	var View = function(element_id) {
 		this.$element = $("#" + element_id);
+		if (!this.$element) {
+			console.log("No such element: " + element_id);
+		}
+		this.artifacts = {};
+		define_built_ins.call(this);
 	}
+
+	View.prototype.define = function(name, constructor) {
+                if (typeof(constructor) == "function") {
+                        artifacts[name] = constructor;
+                }
+                else {
+                        console.log("Error: Topsight.define should receive a name and a constructor function");
+                }
+        };
 
 	View.prototype.construct = function(model) {
 		for (var a in model) {
@@ -39,13 +37,15 @@ Topsight = (function() {
 
 	var define_built_ins = function() {
 		// TODO define artifacts such as: circle, label, paper, pipe
+		define("circle", function(model) {
+			
+		});
+
 	}
 
 
-	init();
 
 	return {
-		define: define,
 		View: View
 	}
 
